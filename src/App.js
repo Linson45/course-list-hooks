@@ -17,13 +17,15 @@ const { Search } = Input;
 
 
 const  App=()=>{
+  useEffect(() => {
 
+    dispatch(getCourses())
+    
+  }, []);
   const courses=useSelector((state)=>state.post.posts)
-  const [filterTable,setFilterTable]=useState(courses?courses:[])
+  const [filterTable,setFilterTable]=useState(courses)
   const dispatch=useDispatch();
   
-  
-
   function parseData(res) {
     return sortFunction(res, "Course Id");
   }
@@ -69,12 +71,7 @@ const  App=()=>{
     setFilterTable(filterTable ? filterTable : courses,)
   };
 
-  useEffect(() => {
-    dispatch(getCourses()).then(
-      setFilterTable(courses)
-    )
-    
-  }, []);
+
 
     return (
       <div>
@@ -97,7 +94,7 @@ const  App=()=>{
             },
             pageSize: 5,
           }}
-          dataSource={filterTable}
+          dataSource={filterTable?filterTable:courses}
 
           renderItem={item => (
             <List.Item
