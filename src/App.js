@@ -70,8 +70,10 @@ const  App=()=>{
   };
 
   useEffect(() => {
-    dispatch(getCourses())
-    setFilterTable(parseData(courses))
+    dispatch(getCourses()).then(
+      setFilterTable(courses)
+    )
+    
   }, []);
 
     return (
