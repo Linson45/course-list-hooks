@@ -26,22 +26,15 @@ export const fetchApi = (param = null, method = null, variables = null) => {
         let { status } = err.response;
         if (status === 401) {
           message.error("Unauthorised User")
+          return false
         } else if (status === 400 || status === 404) {
-          if (err.response.data) {
-            if (err.response.data.response) {
-              return err.response.data;
-            } else if (
-              err.response.data.violations &&
-              err.response.data.violations[0] &&
-              err.response.data.violations[0].message
-            ) {
-              return err.response.data;
-            } else if (err.response.data) {
-              return err.response.data;
-            } else {
-              return false;
-            }
-          } else if (err.response.code) {
+          //
+          const {data, code} = err.response;
+          if (data && data.response) {
+            return data;
+          } 
+          
+          if (code) {
             return err.response;
           } else {
             return false;

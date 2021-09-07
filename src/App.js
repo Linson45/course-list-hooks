@@ -6,6 +6,7 @@ import { fetchApi } from "./api";
 import {useDispatch,useSelector} from 'react-redux';
 import {getCourses} from './actions/postAction'
 import 'antd/dist/antd.css';
+import './styles/App.css'
 import {
   Input,
   List,
@@ -75,19 +76,23 @@ const  App=()=>{
 
     return (
       <div>
-        <Row type="flex" justify="center" align="middle" style={{ minHeight: '10vh' }}>
-          <Search
+        <Row align="center" style={{paddingBottom:"100px"}}>
+        <Col lg={16} md={15} sm={10} >
+        <Search
             id="SearchBox"
             placeholder="Search Courses"
-            style={{ width: 600 }}
             onSearch={(value) =>search(value)}
             onChange={(e) => search(e.target.value)}
             className="search-input"
+            style={{marginTop: "30px"}}
           />
-        </Row>
+        </Col>
+        <Col lg={12} md={15} sm={17} >
         <List
           itemLayout="vertical"
-          size="large"
+          size="small"
+          className="liststyle"
+          style={{marginTop: "20px"}}
           pagination={{
             onChange: page => {
               console.log(page);
@@ -101,13 +106,6 @@ const  App=()=>{
               key={item['Course Id']}
               style={{
                 color: "#fff",
-                width: "760px",
-                height: "150px",
-                margin: "50px auto",
-                display: "-webkit - box",
-                display: "-ms - flexbox",
-                display: "flex",
-                maxWidth: "770px",
                 background: "#00C9FF",
                 background: "-webkit-linear-gradient(to right, #92FE9D, #00C9FF)",
                 background: "-webkit-gradient(linear, left top, right top, from(#92FE9D), to(#00C9FF))",
@@ -132,6 +130,10 @@ const  App=()=>{
     )
   }
         />,
+       
+       </Col>
+        </Row>
+
       </div >
     );
   }
